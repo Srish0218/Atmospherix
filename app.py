@@ -1,4 +1,3 @@
-import os
 from datetime import datetime, timedelta
 import plotly.express as px
 import openai
@@ -9,7 +8,7 @@ import streamlit as st
 
 # Set OpenAI API key
 openai.api_key = "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"
-weather_api_key = os.getenv("646824f2b7b86caffec1d0b16ea77f79")
+weather_api_key = "646824f2b7b86caffec1d0b16ea77f79"
 
 
 def get_weather_data(weather_key):
@@ -104,18 +103,23 @@ def display_weekly(data):
         df = pd.DataFrame(weekly_data)
         # Group by Date and take the average of Min_Temp and Max_Temp
         df_agg = df.groupby('Date').agg({'Humidity': 'mean', 'Pressure': 'mean',
-                                          'Wind Speed': 'mean',
-                                          'Min_Temp (°C)': 'mean', 'Max_Temp (°C)': 'mean'}).reset_index()
+                                         'Wind Speed': 'mean',
+                                         'Min_Temp (°C)': 'mean', 'Max_Temp (°C)': 'mean'}).reset_index()
 
         st.write(df_agg)
 
         # Plotly bar chart for weekly forecast
         fig = go.Figure()
-        fig.add_trace(go.Bar(x=df_agg['Date'], y=df_agg['Min_Temp (°C)'], name='Min Temperature (°C)', marker_color='blue'))
-        fig.add_trace(go.Bar(x=df_agg['Date'], y=df_agg['Max_Temp (°C)'], name='Max Temperature (°C)', marker_color='red'))
-        fig.add_trace(go.Scatter(x=df_agg['Date'], y=df_agg['Humidity'], mode='lines+markers', name='Humidity', yaxis='y2'))
-        fig.add_trace(go.Scatter(x=df_agg['Date'], y=df_agg['Pressure'], mode='lines+markers', name='Pressure', yaxis='y3'))
-        fig.add_trace(go.Scatter(x=df_agg['Date'], y=df_agg['Wind Speed'], mode='lines+markers', name='Wind Speed', yaxis='y4'))
+        fig.add_trace(
+            go.Bar(x=df_agg['Date'], y=df_agg['Min_Temp (°C)'], name='Min Temperature (°C)', marker_color='blue'))
+        fig.add_trace(
+            go.Bar(x=df_agg['Date'], y=df_agg['Max_Temp (°C)'], name='Max Temperature (°C)', marker_color='red'))
+        fig.add_trace(
+            go.Scatter(x=df_agg['Date'], y=df_agg['Humidity'], mode='lines+markers', name='Humidity', yaxis='y2'))
+        fig.add_trace(
+            go.Scatter(x=df_agg['Date'], y=df_agg['Pressure'], mode='lines+markers', name='Pressure', yaxis='y3'))
+        fig.add_trace(
+            go.Scatter(x=df_agg['Date'], y=df_agg['Wind Speed'], mode='lines+markers', name='Wind Speed', yaxis='y4'))
 
         fig.update_layout(title='Weekly Weather Forecast',
                           xaxis_title='Date',
@@ -135,6 +139,7 @@ def compare_weather():
     city1 = st.text_input("Enter City 1: ", "Ludhiana")
     city2 = st.text_input("Enter City 2: ", "Kharar")
 
+    openai_key = "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"
     weather_key1 = f"https://api.openweathermap.org/data/2.5/weather?q={city1}&appid={weather_api_key}"
     weather_key2 = f"https://api.openweathermap.org/data/2.5/weather?q={city2}&appid={weather_api_key}"
 

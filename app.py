@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timedelta
 import plotly.express as px
 import openai
@@ -8,6 +9,7 @@ import streamlit as st
 
 # Set OpenAI API key
 openai.api_key = "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"
+weather_api_key = os.getenv("646824f2b7b86caffec1d0b16ea77f79")
 
 
 def get_weather_data(weather_key):
@@ -69,7 +71,7 @@ def get_weekly(city, lat, lon):
     Returns:
         dict: Weekly weather forecast data in JSON format.
     """
-    weather_key = f'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=646824f2b7b86caffec1d0b16ea77f79'
+    weather_key = f'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={weather_api_key}'
     response = requests.get(weather_key)
     return response.json()
 
@@ -133,9 +135,8 @@ def compare_weather():
     city1 = st.text_input("Enter City 1: ", "Ludhiana")
     city2 = st.text_input("Enter City 2: ", "Kharar")
 
-    openai_key = "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"
-    weather_key1 = f"https://api.openweathermap.org/data/2.5/weather?q={city1}&appid=646824f2b7b86caffec1d0b16ea77f79"
-    weather_key2 = f"https://api.openweathermap.org/data/2.5/weather?q={city2}&appid=646824f2b7b86caffec1d0b16ea77f79"
+    weather_key1 = f"https://api.openweathermap.org/data/2.5/weather?q={city1}&appid={weather_api_key}"
+    weather_key2 = f"https://api.openweathermap.org/data/2.5/weather?q={city2}&appid={weather_api_key}"
 
     submit = st.button("Get Weather")
 
@@ -211,7 +212,7 @@ def weather_forecast():
     """
     city = st.text_input("Enter City: ", "Ludhiana")
 
-    weather_key = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid=646824f2b7b86caffec1d0b16ea77f79"
+    weather_key = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={weather_api_key}"
 
     submit = st.button("Get Weather")
 
@@ -253,7 +254,7 @@ def hourly_forecast():
     st.title("Hourly Weather Forecast")
     city = st.text_input("Enter City: ", "Ludhiana")
 
-    weather_key = f"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid=646824f2b7b86caffec1d0b16ea77f79"
+    weather_key = f"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={weather_api_key}"
 
     submit = st.button("Get Forecast")
 

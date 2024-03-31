@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+    <title>Compare Weather</title>
+</head>
+<body>
+<div class = 'bg'>
+        <div class="Weather-Forecast-container">
+    <h1>COMPARE WEATHER</h1>
+    <form method="POST">
+        <label for="city1">Enter City 1:</label>
+        <input type="text" id="city1" name="city1" required>
+        <label for="city2">Enter City 2:</label>
+        <input type="text" id="city2" name="city2" required>
+        <button type="submit">Compare</button>
+    </form>
+
+        </div>
+
+
+</div>
+
+</body>
+</html>

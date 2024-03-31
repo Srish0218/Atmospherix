@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+    <title>Hourly Forecast</title>
+</head>
+<body>
+<div class = 'bg'>
+        <div class="Weather-Forecast-container">
+    <h1>Hourly Forecast</h1>
+    <form method="POST">
+        <label for="city">Enter City:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">Get Forecast</button>
+    </form>
+        </div>
+</div>
+</body>
+</html>
